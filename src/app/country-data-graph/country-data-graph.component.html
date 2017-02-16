@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md">
+      <canvas baseChart
+              height="200px"
+              width="400px"
+              [datasets]="lineChartData$|async"
+              [labels]="lineChartLabels$|async"
+              [options]="lineChartOptions"
+              [colors]="lineChartColors"
+              [legend]="lineChartLegend"
+              [chartType]="lineChartType"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)">
+        Blah ?
+      </canvas>
+    </div>
+    <div class="col-md">
+      <table class="table table-bordered table-sm table-hover">
+        <thead>
+        <tr>
+          <th>Year</th>
+          <th>Value</th>
+          <th>Inflation %</th>
+        </tr>
+        </thead>
+        <tbody *ngIf="details$|async">
+        <tr *ngFor="let row of (details$|async)"
+            [ngClass]="{'table-success': row.isActualizedYear, 'table-info': row.isBaseYear }">
+          <td>{{ row.year }}</td>
+          <td>{{ row.value | number:'1.2-2' }}</td>
+          <td>{{ row.inflation | number:'1.2-2' }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
