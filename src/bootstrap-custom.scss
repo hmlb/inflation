@@ -1,4 +1,55 @@
+//$body-bg: #f8fcff;
+$body-bg: $white;
+$body-color: #3c4859;
+$inverse-bg: $gray-dark;
+$inverse-color: $gray-lighter;
 
-$border-radius:          .25rem !default;
-$border-radius-lg:       .3rem !default;
-$border-radius-sm:       .2rem !default;
+$border-radius: .25rem;
+$border-radius-lg: .3rem;
+$border-radius-sm: .2rem;
+
+$font-family-sans-serif: 'Open Sans', Roboto, "Helvetica Neue", Arial, sans-serif;
+$font-family-serif: 'Lora', Georgia, "Times New Roman", Times, serif;
+$font-family-monospace: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+$font-family-base: $font-family-serif;
+
+$headings-font-family: $font-family-serif;
+$headings-font-weight: 400;
+
+
+$input-padding-x:                0;
+$input-padding-y:                0;
+$input-line-height:              1;
+
+$input-bg:                       $gray-lightest;
+$input-bg-disabled:              $gray-lighter;
+
+$input-color:                    inherit;
+$input-border-color:             transparent;
+$input-btn-border-width:         0px;
+//$input-box-shadow:               inset 0 1px 1px rgba($black,.075);
+$input-box-shadow:              none;
+
+
+$input-border-radius:            $border-radius;
+$input-border-radius-lg:         $border-radius-lg;
+$input-border-radius-sm:         $border-radius-sm;
+
+$input-bg-focus:                 $input-bg;
+$input-border-focus:             lighten($brand-primary, 25%);
+$input-box-shadow-focus:         $input-box-shadow, rgba($input-border-focus, .6);
+$input-color-focus:              $input-color;
+
+$input-color-placeholder:        $gray-light;
+
+$input-padding-x-sm:             0;
+$input-padding-y-sm:             0;
+
+$input-padding-x-lg:             0;
+$input-padding-y-lg:             0;
+
+$input-height:                   (($font-size-base * $input-line-height) + ($input-padding-y * 2));
+$input-height-lg:                (($font-size-lg * $line-height-lg) + ($input-padding-y-lg * 2));
+$input-height-sm:                (($font-size-sm * $line-height-sm) + ($input-padding-y-sm * 2));
+
+$input-transition:               border-color ease-in-out .15s, box-shadow ease-in-out .15s;

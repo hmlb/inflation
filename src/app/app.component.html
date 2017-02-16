@@ -10,14 +10,17 @@
     <div class="col-md-10 push-md-1">
       <form class="form-inline lead" novalidate [formGroup]="form">
         In&nbsp;
-        <span class="country-selector-wrapper">
-        <ng-select
-          class="country-selector"
-          [options]="selectableCountries$|async"
-          placeholder="United States"
-          formControlName="country">
-        </ng-select>
-        </span>, an amount of&nbsp;
+        <input auto-complete
+               class="form-control"
+               formControlName="country"
+               [source]="selectableCountries$|async"
+               [display-property-name]="'name'"
+               [list-formatter]="formatCountrySearch"
+        />
+
+        <!--[select-value-of]="'id'"-->
+        <!--[display-property-name]="'value'"-->
+        , an amount of&nbsp;
         <input class="form-control" type="number" min="0" formControlName="amount" placeholder="42,000"/>
         &nbsp;in the year&nbsp;
         <input class="form-control" type="number"

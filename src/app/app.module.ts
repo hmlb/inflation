@@ -7,12 +7,12 @@ import { WorldbankDataProvider } from './inflation/worldbank.data.provider';
 import { DataRepository } from './inflation/data.repository';
 import { CountryDataGraphComponent } from './country-data-graph/country-data-graph.component';
 import { ChartsModule } from 'ng2-charts';
-import { SelectModule } from 'angular2-select';
 import { StoreModule } from '@ngrx/store';
 import { inflationReducer } from './inflation/inflation';
 import { EffectsModule } from '@ngrx/effects';
 import { InflationEffects } from './inflation/inflation.effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/filter';
@@ -36,7 +36,7 @@ import { Location, LocationStrategy, PathLocationStrategy } from '@angular/commo
     ReactiveFormsModule,
     HttpModule,
     ChartsModule,
-    SelectModule,
+    Ng2AutoCompleteModule,
     StoreModule.provideStore({ inflation: inflationReducer }),
     StoreDevtoolsModule.instrumentOnlyWithExtension({
       maxAge: 5

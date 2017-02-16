@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy": "ng build --prod --base-href \"https://hmlb.github.io/inflation/\" && ngh -S"
+    "deploy": "ng build --prod --base-href \"https://hmlb.github.io/inflation/\" && cp src/404.html dist/404.html && ngh -S"
   },
   "private": true,
   "dependencies": {
@@ -25,12 +25,12 @@
     "@ngrx/effects": "^2.0.0",
     "@ngrx/store": "^2.2.1",
     "@ngrx/store-devtools": "^3.2.3",
-    "angular2-select": "^1.0.0-beta.3",
     "bootstrap": "next",
     "chart.js": "^2.5.0",
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",
     "immutable": "^3.8.1",
+    "ng2-auto-complete": "^0.10.9",
     "ng2-charts": "^1.5.0",
     "primeng": "^2.0.0",
     "rxjs": "^5.0.1",

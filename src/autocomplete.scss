@@ -1,0 +1,54 @@
+@keyframes slideDown {
+  0% {
+    transform: translateY(-30px) !important;
+  }
+  100% {
+    transform: translateY(0px) !important;
+  }
+}
+
+.ng2-auto-complete {
+  background-color: transparent !important;
+}
+
+.ng2-auto-complete > input {
+  outline: none !important;
+  border: 0 !important;
+  padding: 2px !important;
+  box-sizing: border-box !important;
+  background-clip: content-box !important;
+}
+
+.ng2-auto-complete > ul {
+  background-color: #fff !important;
+  margin: 7px 0 !important;
+  width: 100% !important;
+  overflow-y: auto !important;
+  list-style-type: none !important;
+  padding: 0 !important;
+  border: 1px solid $gray-light !important;
+  box-sizing: border-box !important;
+  animation: slideDown 100ms !important;
+}
+
+.ng2-auto-complete > ul.empty {
+  display: none !important;
+}
+
+.ng2-auto-complete > ul li {
+  cursor: pointer;
+  padding: 2px 5px !important;
+  border-bottom: 1px solid $gray-lightest !important;
+}
+
+.ng2-auto-complete > ul li.selected {
+  background-color: #d7ecff !important;
+}
+
+.ng2-auto-complete > ul li:last-child {
+  border-bottom: none !important;
+}
+
+.ng2-auto-complete > ul li:hover {
+  background-color: #c1ddff !important;
+}

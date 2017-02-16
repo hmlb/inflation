@@ -7,6 +7,7 @@ import { DataResult } from './inflation/data.result';
 import { Store } from '@ngrx/store';
 import { AppState } from './app.state';
 import { QUERY } from './inflation/inflation';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -17,13 +18,14 @@ export class AppComponent implements OnInit {
 
   public form: FormGroup;
   public countries$: Observable<Map<string, string>>;
-  public selectableCountries$: Observable<{ value: string; label: string; }[]>;
+  public selectableCountries$: Observable<any[]>;
   public queryResult$: Observable<DataResult>;
 
   constructor(
     private repository: DataRepository,
     private store: Store<AppState>,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private sanitizer: DomSanitizer
   ) {
     this.queryResult$ = this.repository.result();
   }
@@ -33,17 +35,17 @@ export class AppComponent implements OnInit {
     this.selectableCountries$ = this.countries$
       .map(countries => {
         return countries
-          .map((label, value) => {
+          .map((name, id) => {
             return {
-              value,
-              label,
+              id,
+              name,
             };
           })
           .toArray();
       });
 
     this.form = this.formBuilder.group({
-      country: new FormControl('USA', Validators.required),
+      country: new FormControl({ id: 'USA', name: 'United States' }, Validators.required),
       amount: new FormControl(1000, Validators.required),
       year: new FormControl(1965, Validators.required),
       actualizedYear: new FormControl(2016, Validators.required),
@@ -52,10 +54,12 @@ export class AppComponent implements OnInit {
     Observable
       .combineLatest([ this.form.valueChanges, this.form.statusChanges ])
       .filter(([ data, status ]) => status === 'VALID')
+      .switchMap(([ data ]) => Observable.combineLatest(Observable.of(data), this.countries$))
+      .filter(([ data, countries ]) => countries.has(data.country.id))
       .map(([ data ]) => {
         return {
           year: data.year,
-          country: data.country,
+          country: data.country.id,
           amount: data.amount,
           actualizedYear: data.actualizedYear,
         };
@@ -81,5 +85,10 @@ export class AppComponent implements OnInit {
     }
 
     this.queryResult$.subscribe(console.log.bind(this));
+  }
+
+  public formatCountrySearch(data: any): string|SafeHtml {
+    return data.name;
+    //return this.sanitizer.bypassSecurityTrustHtml(data.value);
   }
 }
