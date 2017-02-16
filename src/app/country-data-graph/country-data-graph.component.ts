@@ -13,6 +13,34 @@ export class CountryDataGraphComponent implements OnInit {
   public result$: Observable<DataResult>;
   public details$: Observable<any>;
 
+  public barChartData$: Observable<any[]>;
+  public barChartLabels$: Observable<any[]>;
+
+  public barChartOptions: any = {
+    responsive: true,
+    legend: {
+      display: false,
+    },
+    hover: {
+      mode: 'nearest',
+    },
+    animation: {
+      duration: 400,
+    },
+    scales: {
+      yAxes: [ {
+        ticks: {
+          beginAtZero: true
+        }
+      } ]
+    }
+  };
+  public barChartColors: Array<any> = [
+    'rgba(255, 99, 132, 0.2)',
+    'rgba(54, 162, 235, 0.2)',
+  ];
+  public barChartLegend: boolean = true;
+  public barChartType: string = 'bar';
 
   public lineChartData$: Observable<any[]>;
   public lineChartLabels$: Observable<any[]>;
@@ -69,6 +97,28 @@ export class CountryDataGraphComponent implements OnInit {
     this.lineChartLabels$ = this
       .result$
       .map(result => result.adjustedValues.keySeq().toArray());
+
+    this.barChartData$ = this
+      .result$
+      .map(result => [
+          {
+            data: [ result.adjustedValues.get(result.year), result.adjustedValues.get(result.actualizedYear), ],
+            label: 'Adjusted buying power',
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+            ],
+            borderColor: [
+              'rgba(255,99,132,1)',
+              'rgba(54, 162, 235, 1)',
+            ],
+          },
+        ]
+      );
+
+    this.barChartLabels$ = this
+      .result$
+      .map(result => [ result.year, result.actualizedYear, ]);
 
     this.details$ = this
       .result$

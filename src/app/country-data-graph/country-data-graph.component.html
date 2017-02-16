@@ -4,15 +4,14 @@
       <canvas baseChart
               height="200px"
               width="400px"
-              [datasets]="lineChartData$|async"
-              [labels]="lineChartLabels$|async"
-              [options]="lineChartOptions"
-              [colors]="lineChartColors"
-              [legend]="lineChartLegend"
-              [chartType]="lineChartType"
+              [datasets]="barChartData$|async"
+              [labels]="barChartLabels$|async"
+              [options]="barChartOptions"
+              [colors]="barChartColors"
+              [legend]="barChartLegend"
+              [chartType]="barChartType"
               (chartHover)="chartHovered($event)"
               (chartClick)="chartClicked($event)">
-        Blah ?
       </canvas>
     </div>
     <div class="col-md">
@@ -33,6 +32,22 @@
         </tr>
         </tbody>
       </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xl">
+      <canvas baseChart
+              height="200px"
+              width="400px"
+              [datasets]="lineChartData$|async"
+              [labels]="lineChartLabels$|async"
+              [options]="lineChartOptions"
+              [colors]="lineChartColors"
+              [legend]="lineChartLegend"
+              [chartType]="lineChartType"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)">
+      </canvas>
     </div>
   </div>
 </div>
