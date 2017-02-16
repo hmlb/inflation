@@ -3,16 +3,20 @@ import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { InflationData } from './inflation.data';
 import { OrderedMap } from 'immutable';
+import { Location } from '@angular/common';
 
 @Injectable()
 export class WorldbankDataProvider {
   private readonly endpoint = '/assets/data/worldbank.inflation.data.csv';
 
-  constructor(private http: Http) {
+  constructor(
+    private http: Http,
+    private location: Location
+  ) {
   }
 
   public inflationData(): Observable<InflationData[]> {
-    return this.http.get(this.endpoint)
+    return this.http.get(this.location.prepareExternalUrl(this.endpoint))
       .map(this.extractData)
       .map(this.convertData)
       .publishReplay(1)

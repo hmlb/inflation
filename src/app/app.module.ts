@@ -23,6 +23,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/observable/of';
+import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,8 @@ import 'rxjs/add/observable/of';
   providers: [
     DataRepository,
     WorldbankDataProvider,
+    Location,
+    { provide: LocationStrategy, useClass: PathLocationStrategy },
   ],
   bootstrap: [ AppComponent ]
 })
