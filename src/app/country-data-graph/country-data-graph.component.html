@@ -1,18 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md">
-      <canvas baseChart
-              height="200px"
-              width="400px"
-              [datasets]="barChartData$|async"
-              [labels]="barChartLabels$|async"
-              [options]="barChartOptions"
-              [colors]="barChartColors"
-              [legend]="barChartLegend"
-              [chartType]="barChartType"
-              (chartHover)="chartHovered($event)"
-              (chartClick)="chartClicked($event)">
-      </canvas>
+      <chart [options]="chartOptions$ | async"></chart>
     </div>
     <div class="col-md">
       <table class="table table-bordered table-sm table-hover">
@@ -36,18 +25,6 @@
   </div>
   <div class="row">
     <div class="col-xl">
-      <canvas baseChart
-              height="200px"
-              width="400px"
-              [datasets]="lineChartData$|async"
-              [labels]="lineChartLabels$|async"
-              [options]="lineChartOptions"
-              [colors]="lineChartColors"
-              [legend]="lineChartLegend"
-              [chartType]="lineChartType"
-              (chartHover)="chartHovered($event)"
-              (chartClick)="chartClicked($event)">
-      </canvas>
     </div>
   </div>
 </div>

@@ -9,9 +9,10 @@ import { DataResult } from '../inflation/data.result';
   styleUrls: [ './country-data-graph.component.scss' ]
 })
 export class CountryDataGraphComponent implements OnInit {
-
   public result$: Observable<DataResult>;
   public details$: Observable<any>;
+
+  public chartOptions$: Observable<any>;
 
   public barChartData$: Observable<any[]>;
   public barChartLabels$: Observable<any[]>;
@@ -93,6 +94,56 @@ export class CountryDataGraphComponent implements OnInit {
           // },
         ]
       );
+    this.chartOptions$ = this
+      .result$
+      .map(result => {
+        return {
+          title: { text: `Adjusted value of ${result.amount} in ${result.year}` },
+          plotOptions: {
+            series: {
+              animation: {
+                duration: 200,
+              }
+            }
+          },
+          xAxis: {
+            type: 'linear',
+          },
+          series: [ {
+            name: 'Adjusted value',
+            data: result
+              .adjustedValues
+              .map((value, index) => {
+                console.warn(value, index);
+                if (index === result.year) {
+                  return {
+                    y: value,
+                    x: index,
+                    color: '#BF0B23',
+                    marker: { fillColor: '#BF0B23', radius: 7 },
+                  };
+                }
+                if (index === result.actualizedYear) {
+                  return {
+                    y: value,
+                    x: index,
+                    color: '#1bbf14',
+                    marker: { fillColor: '#17bf2a', radius: 7 },
+                  };
+                }
+
+                return { y: value, x: index };
+              })
+              .toArray(),
+            tooltip: {
+              formatter: (a, b, c, d, e, f) => {
+                console.warn(a, b, c, d, e, f);
+                `${Math.round(1 * 100) / 100}`;
+              }
+            }
+          } ]
+        }
+      });
 
     this.lineChartLabels$ = this
       .result$
@@ -137,6 +188,7 @@ export class CountryDataGraphComponent implements OnInit {
           })
           .toArray();
       });
+    this.chartOptions$.subscribe(console.log.bind(this));
   }
 
   // events

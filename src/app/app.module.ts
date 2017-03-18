@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { WorldbankDataProvider } from './inflation/worldbank.data.provider';
 import { DataRepository } from './inflation/data.repository';
 import { CountryDataGraphComponent } from './country-data-graph/country-data-graph.component';
-import { ChartsModule } from 'ng2-charts';
+import { ChartModule } from 'angular2-highcharts';
 import { StoreModule } from '@ngrx/store';
 import { inflationReducer } from './inflation/inflation';
 import { EffectsModule } from '@ngrx/effects';
@@ -24,6 +24,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/observable/of';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+const highcharts = require('highcharts');
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { Location, LocationStrategy, PathLocationStrategy } from '@angular/commo
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    ChartsModule,
+    ChartModule.forRoot(highcharts),
     Ng2AutoCompleteModule,
     StoreModule.provideStore({ inflation: inflationReducer }),
     StoreDevtoolsModule.instrumentOnlyWithExtension({
